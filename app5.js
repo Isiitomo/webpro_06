@@ -3,6 +3,41 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use("/public", express.static(__dirname + "/public"));
+app.use(express.urlencoded({ extended: true }));
+
+let station = [
+  { id:1, code:"JE01", name:"東京駅"},
+  { id:2, code:"JE07", name:"舞浜駅"},
+  { id:3, code:"JE12", name:"新習志野駅"},
+  { id:4, code:"JE13", name:"幕張豊砂駅"},
+  { id:5, code:"JE14", name:"海浜幕張駅"},
+  { id:6, code:"JE05", name:"新浦安駅"},
+];
+
+app.get("/keiyo", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  res.re('db1', { data: station });
+});
+
+let players = [
+  { id: 1, position: "GK", name: "ジャンルイジ・ブッフォン" },
+  { id: 2, position: "LSB", name: "ジャンルカ・ザンブロッタ" },
+  { id: 3, position: "CB", name: "リリアン・テュラム" },
+  { id: 4, position: "CB", name: "リオ・ファーディナンド" },
+  { id: 5, position: "RSB", name: "アルベルト・フェレール" },
+  { id: 6, position: "DMF", name: "ロドリ" },
+  { id: 7, position: "CMF", name: "パトリック・ヴィエラ" },
+  { id: 8, position: "CF", name: "ズラタン・イブラヒモビッチ" },
+  { id: 9, position: "ST", name: "ハリー・ケイン" },
+  { id: 10, position: "CF", name: "キリアン・エムバペ" },
+  { id: 11, position: "ST", name: "リオネル・メッシ" }
+];
+
+app.get("/players", (req, res) => {
+  res.render('db3', { data: players });
+});
+
+
 
 app.get("/hello1", (req, res) => {
   const message1 = "Hello world";

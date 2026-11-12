@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>eFootballのフォーメーション</title>
+</head>
+<body>
+  <h1>eFootballのフォーメーション</h1>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ポジション</th>
+        <th>選手名</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for (let item of data) { %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= item.position %></td>
+          <td><%= item.name %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>
