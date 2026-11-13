@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>選手詳細</title>
+</head>
+<body>
+  <h1>選手詳細</h1>
+
+  <table border="1">
+    <tr>
+      <th>選手名</th>
+      <td><%= data.name %></td>
+    </tr>
+    <tr>
+      <th>ポジション</th>
+      <td><%= data.position %></td>
+    </tr>
+    <tr>
+      <th>投打</th>
+      <td><%= data.touda %></td>
+    </tr>
+
+    <% if (data.type === "バッター") { %>
+      <tr>
+        <th>生涯打率</th>
+        <td><%= data.syougaiDatsuritsu %></td>
+      </tr>
+      <tr>
+        <th>生涯ホームラン数</th>
+        <td><%= data.syougaiHR %>本</td>
+      </tr>
+    <% } %>
+
+    <% if (data.type === "ピッチャー") { %>
+      <tr>
+        <th>生涯防御率</th>
+        <td><%= data.syougaiBougyoritsu %></td>
+      </tr>
+    <% } %>
+
+    <tr>
+      <th>移籍歴</th>
+      <td><%= data.iten %></td>
+    </tr>
+  </table>
+
+  <p><a href="/baseballplayers">選手一覧に戻る</a></p>
+</body>
+</html>

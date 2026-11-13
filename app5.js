@@ -69,19 +69,26 @@ app.get("/soccerplayers/:number", (req, res) => {
 });
 
 let baseballplayers = [
-  { id: 1, position: "ショートストッパー", name: "田中広輔" },
-  { id: 2, position: "セカンド", name: "菊池涼介" },
-  { id: 3, position: "ファースト", name: "衣笠祥雄" },
-  { id: 4, position: "センター", name: "山本浩二" },
-  { id: 5, position: "レフト", name: "金本知憲" },
-  { id: 6, position: "サード", name: "新井貴浩" },
-  { id: 7, position: "ライト", name: "鈴木誠也" },
-  { id: 8, position: "キャッチャー", name: "達川光男" },
-  { id: 9, position: "ピッチャー", name: "黒田博樹" }
-]
+  { id: 1, position: "ショートストッパー", name: "田中広輔", type: "バッター", syougaiDatsuritsu: ".256", syougaiHR: 69, touda: "右投左打", syougaiBougyoritsu: "-", iten: "広島東洋カープ" },
+  { id: 2, position: "セカンド", name: "菊池涼介", type: "バッター", syougaiDatsuritsu: ".265", syougaiHR: 142, touda: "右投右打", syougaiBougyoritsu: "-", iten: "広島東洋カープ" },
+  { id: 3, position: "ファースト", name: "衣笠祥雄", type: "バッター", syougaiDatsuritsu: ".270", syougaiHR: 504, touda: "右投右打", syougaiBougyoritsu: "-", iten: "広島東洋カープ" },
+  { id: 4, position: "センター", name: "山本浩二", type: "バッター", syougaiDatsuritsu: ".290", syougaiHR: 536, touda: "右投右打", syougaiBougyoritsu: "-", iten: "広島東洋カープ" },
+  { id: 5, position: "レフト", name: "金本知憲", type: "バッター", syougaiDatsuritsu: ".285", syougaiHR: 476, touda: "左投左打", syougaiBougyoritsu: "-", iten: "広島東洋カープ → 阪神タイガース" },
+  { id: 6, position: "サード", name: "新井貴浩", type: "バッター", syougaiDatsuritsu: ".278", syougaiHR: 319, touda: "右投右打", syougaiBougyoritsu: "-", iten: "広島東洋カープ → 阪神タイガース → 広島東洋カープ" },
+  { id: 7, position: "ライト", name: "鈴木誠也", type: "バッター", syougaiDatsuritsu: ".315", syougaiHR: 182, touda: "右投右打", syougaiBougyoritsu: "-", iten: "広島東洋カープ → シカゴ・カブス" },
+  { id: 8, position: "キャッチャー", name: "達川光男", type: "バッター", syougaiDatsuritsu: ".246", syougaiHR: 51, touda: "右投右打", syougaiBougyoritsu: "-", iten: "広島東洋カープ" },
+  { id: 9, position: "ピッチャー", name: "黒田博樹", type: "ピッチャー", syougaiDatsuritsu: "-", syougaiHR: "-", touda: "右投右打", syougaiBougyoritsu: "3.55", iten: "広島東洋カープ → ロサンゼルス・ドジャース → ニューヨーク・ヤンキース → 広島東洋カープ" }
+];
 
 app.get("/baseballplayers", (req, res) => {
-  res.render('db4', { data: players });
+  res.render('db4', { data: baseballplayers });
+});
+
+app.get("/baseballplayers/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = baseballplayers[ number -1 ];
+  res.render('db4_detail', {data: detail} );
 });
 
 app.get("/hello1", (req, res) => {
