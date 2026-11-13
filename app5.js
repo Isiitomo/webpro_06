@@ -41,22 +41,31 @@ app.get("/keiyo2/:number", (req, res) => {
   res.render('keiyo2_detail', {data: detail} );
 });
 
+"use strict";
+
 let soccerplayers = [
-  { id: 1, position: "GK", name: "ジャンルイジ・ブッフォン" },
-  { id: 2, position: "LSB", name: "ジャンルカ・ザンブロッタ" },
-  { id: 3, position: "CB", name: "リリアン・テュラム" },
-  { id: 4, position: "CB", name: "リオ・ファーディナンド" },
-  { id: 5, position: "RSB", name: "アルベルト・フェレール" },
-  { id: 6, position: "DMF", name: "ロドリ" },
-  { id: 7, position: "CMF", name: "パトリック・ヴィエラ" },
-  { id: 8, position: "CF", name: "ズラタン・イブラヒモビッチ" },
-  { id: 9, position: "ST", name: "ハリー・ケイン" },
-  { id: 10, position: "CF", name: "キリアン・エムバペ" },
-  { id: 11, position: "ST", name: "リオネル・メッシ" }
+  { id: 1, position: "GK", name: "ジャンルイジ・ブッフォン", club: "引退", country: "イタリア", foot: "右足" },
+  { id: 2, position: "LSB", name: "ジャンルカ・ザンブロッタ", club: "引退", country: "イタリア", foot: "両足" },
+  { id: 3, position: "CB", name: "リリアン・テュラム", club: "引退", country: "フランス", foot: "右足" },
+  { id: 4, position: "CB", name: "リオ・ファーディナンド", club: "引退", country: "イングランド", foot: "右足" },
+  { id: 5, position: "RSB", name: "アルベルト・フェレール", club: "引退", country: "スペイン", foot: "右足" },
+  { id: 6, position: "DMF", name: "ロドリ", club: "マンチェスター・シティ", country: "スペイン", foot: "右足" },
+  { id: 7, position: "CMF", name: "パトリック・ヴィエラ", club: "引退", country: "フランス", foot: "右足" },
+  { id: 8, position: "CF", name: "ズラタン・イブラヒモビッチ", club: "引退", country: "スウェーデン", foot: "右足" },
+  { id: 9, position: "ST", name: "ハリー・ケイン", club: "バイエルン・ミュンヘン", country: "イングランド", foot: "右足" },
+  { id: 10, position: "CF", name: "キリアン・エムバペ", club: "レアル・マドリード", country: "フランス", foot: "右足" },
+  { id: 11, position: "ST", name: "リオネル・メッシ", club: "インテル・マイアミ", country: "アルゼンチン", foot: "左足" }
 ];
 
 app.get("/soccerplayers", (req, res) => {
-  res.render('db3', { data: players });
+  res.render('db3', { data: soccerplayers });
+});
+
+app.get("/soccerplayers/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = soccerplayers[ number -1];
+  res.render('db3_detail', {data: detail} );
 });
 
 let baseballplayers = [
@@ -70,6 +79,10 @@ let baseballplayers = [
   { id: 8, position: "キャッチャー", name: "達川光男" },
   { id: 9, position: "ピッチャー", name: "黒田博樹" }
 ]
+
+app.get("/baseballplayers", (req, res) => {
+  res.render('db4', { data: players });
+});
 
 app.get("/hello1", (req, res) => {
   const message1 = "Hello world";

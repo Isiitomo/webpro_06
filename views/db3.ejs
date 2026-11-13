@@ -15,13 +15,14 @@
         <th>選手名</th>
       </tr>
     </thead>
-
     <tbody>
       <% for (let item of data) { %>
         <tr>
           <td><%= item.id %></td>
           <td><%= item.position %></td>
-          <td><%= item.name %></td>
+          <td>
+            <a href="/soccerplayers/<%= item.id %>"><%= item.name %></a>
+          </td>
         </tr>
       <% } %>
     </tbody>
