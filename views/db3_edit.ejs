@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>選手情報の編集</title>
+</head>
+<body>
+  <h1>選手情報の編集</h1>
+  <form action="/soccerplayers/update/<%= data.id %>" method="post">
+    <p>ポジション：<input type="text" name="position" value="<%= data.position %>"></p>
+    <p>選手名：<input type="text" name="name" value="<%= data.name %>"></p>
+    <p>所属クラブ：<input type="text" name="club" value="<%= data.club %>"></p>
+    <p>出身国：<input type="text" name="country" value="<%= data.country %>"></p>
+    <p>利き足：<input type="text" name="foot" value="<%= data.foot %>"></p>
+    <button type="submit">更新</button>
+  </form>
+  <p><a href="/soccerplayers/<%= data.id %>">詳細画面に戻る</a></p>
+</body>
+</html>

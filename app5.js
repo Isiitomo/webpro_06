@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require("express");
 const app = express();
 
@@ -93,7 +95,6 @@ app.post("/keiyo2/update/:number", (req, res) => {
 });
 
 
-"use strict";
 
 let soccerplayers = [
   { id: 1, position: "GK", name: "ジャンルイジ・ブッフォン", club: "引退", country: "イタリア", foot: "右足" },
@@ -109,16 +110,70 @@ let soccerplayers = [
   { id: 11, position: "ST", name: "リオネル・メッシ", club: "インテル・マイアミ", country: "アルゼンチン", foot: "左足" }
 ];
 
+
+// Read：一覧
 app.get("/soccerplayers", (req, res) => {
-  res.render('db3', { data: soccerplayers });
+  res.render('db3', {data: soccerplayers});
 });
 
+// Create：新規登録画面
+app.get("/soccerplayers/create", (req, res) => {
+  res.render('db3_new');
+});
+
+// Create：新規登録処理
+app.post("/soccerplayers", (req, res) => {
+  const id = soccerplayers.length + 1;
+  const position = req.body.position;
+  const name = req.body.name;
+  const club = req.body.club;
+  const country = req.body.country;
+  const foot = req.body.foot;
+
+  soccerplayers.push({
+    id: id,
+    position: position,
+    name: name,
+    club: club,
+    country: country,
+    foot: foot
+  });
+
+  console.log(soccerplayers);
+  res.redirect('/soccerplayers');
+});
+
+// Read：詳細表示
 app.get("/soccerplayers/:number", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
   const number = req.params.number;
-  const detail = soccerplayers[ number -1];
-  res.render('db3_detail', {data: detail} );
+  const detail = soccerplayers[number - 1];
+  res.render('db3_detail', {data: detail});
 });
+
+// Update：編集画面
+app.get("/soccerplayers/edit/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = soccerplayers[number - 1];
+  res.render('db3_edit', {id: number, data: detail});
+});
+
+// Update：更新処理
+app.post("/soccerplayers/update/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+
+  soccerplayers[number - 1].position = req.body.position;
+  soccerplayers[number - 1].name = req.body.name;
+  soccerplayers[number - 1].club = req.body.club;
+  soccerplayers[number - 1].country = req.body.country;
+  soccerplayers[number - 1].foot = req.body.foot;
+
+  console.log(soccerplayers);
+  res.redirect('/soccerplayers');
+});
+
 
 let baseballplayers = [
   { id: 1, position: "ショートストッパー", name: "田中広輔", type: "バッター", syougaiDatsuritsu: ".256", syougaiHR: 69, touda: "右投左打", syougaiBougyoritsu: "-", iten: "広島東洋カープ" },

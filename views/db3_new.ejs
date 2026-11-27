@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>選手登録</title>
+</head>
+<body>
+  <h1>新しい選手を登録</h1>
+
+  <form action="/soccerplayers" method="post">
+    <p>ポジション：<input type="text" name="position"></p>
+    <p>選手名：<input type="text" name="name"></p>
+    <p>所属クラブ：<input type="text" name="club"></p>
+    <p>出身国：<input type="text" name="country"></p>
+    <p>利き足：<input type="text" name="foot"></p>
+    <button type="submit">登録</button>
+  </form>
+
+  <p><a href="/soccerplayers">選手一覧に戻る</a></p>
+</body>
+</html>
