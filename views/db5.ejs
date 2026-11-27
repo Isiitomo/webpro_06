@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>映画データベース</title>
+</head>
+<body>
+  <h1>映画データベース</h1>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>映画タイトル</th>
+      <th>公開年</th>
+      <th>ジャンル</th>
+    </tr>
+    <% for (let item of data) { %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><a href="/movies/<%= item.id %>"><%= item.title %></a></td>
+        <td><%= item.year %>年</td>
+        <td><%= item.genre %></td>
+      </tr>
+    <% } %>
+  </table>
+</body>
+</html>

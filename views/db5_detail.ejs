@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>映画詳細</title>
+</head>
+<body>
+  <h1>映画詳細</h1>
+  <table border="1">
+    <tr>
+      <th>映画タイトル</th>
+      <td><%= data.title %></td>
+    </tr>
+    <tr>
+      <th>公開年</th>
+      <td><%= data.year %>年</td>
+    </tr>
+    <tr>
+      <th>ジャンル</th>
+      <td><%= data.genre %></td>
+    </tr>
+    <tr>
+      <th>出演者</th>
+      <td><%= data.cast %></td>
+    </tr>
+    <tr>
+      <th>あらすじ</th>
+      <td><%= data.story %></td>
+    </tr>
+    <tr>
+      <th>似ている映画</th>
+      <td><%= data.similar %></td>
+    </tr>
+  </table>
+  <p><a href="/movies">映画一覧に戻る</a></p>
+</body>
+</html>

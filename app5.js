@@ -29,17 +29,69 @@ let station2 = [
   { id:7, code:"JE18", name:"蘇我駅", change:"内房線，外房線", passengers:31328, distance:43.0 },
 ];
 
+// 一覧
 app.get("/keiyo2", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
   res.render('keiyo2', {data: station2} );
 });
 
+// Create
+app.get("/keiyo2/create", (req, res) => {
+  res.redirect('/public/keiyo2_new.html');
+});
+
+// Read
 app.get("/keiyo2/:number", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
   const number = req.params.number;
   const detail = station2[ number ];
-  res.render('keiyo2_detail', {data: detail} );
+  res.render('keiyo2_detail', {id: number, data: detail} );
 });
+
+// Delete
+app.get("/keiyo2/delete/:number", (req, res) => {
+  // 本来は削除の確認ページを表示する
+  // 本来は削除する番号が存在するか厳重にチェックする
+  // 本来ならここにDBとのやり取りが入る
+  station2.splice( req.params.number, 1 );
+  res.redirect('/keiyo2' );
+});
+
+// Create
+app.post("/keiyo2", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const id = station2.length + 1;
+  const code = req.body.code;
+  const name = req.body.name;
+  const change = req.body.change;
+  const passengers = req.body.passengers;
+  const distance = req.body.distance;
+  station2.push( { id: id, code: code, name: name, change: change, passengers: passengers, distance: distance } );
+  console.log( station2 );
+  res.render('keiyo2', {data: station2} );
+});
+
+// Edit
+app.get("/keiyo2/edit/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = station2[ number ];
+  res.render('keiyo2_edit', {id: number, data: detail} );
+});
+
+// Update
+app.post("/keiyo2/update/:number", (req, res) => {
+  // 本来は変更する番号が存在するか，各項目が正しいか厳重にチェックする
+  // 本来ならここにDBとのやり取りが入る
+  station2[req.params.number].code = req.body.code;
+  station2[req.params.number].name = req.body.name;
+  station2[req.params.number].change = req.body.change;
+  station2[req.params.number].passengers = req.body.passengers;
+  station2[req.params.number].distance = req.body.distance;
+  console.log( station2 );
+  res.redirect('/keiyo2' );
+});
+
 
 "use strict";
 
@@ -89,6 +141,27 @@ app.get("/baseballplayers/:number", (req, res) => {
   const number = req.params.number;
   const detail = baseballplayers[ number -1 ];
   res.render('db4_detail', {data: detail} );
+});
+
+let movies = [
+  { id: 1, title: "アベンジャーズ／エンドゲーム", year: 2019, genre: "アクション・SF・アドベンチャー", cast: "ロバート・ダウニー・Jr.、クリス・エヴァンス、クリス・ヘムズワース、スカーレット・ヨハンソン", story: "サノスによって宇宙の生命の半分が消滅した後、生き残ったアベンジャーズが仲間を取り戻すため、最後の戦いに挑む。", similar: "アベンジャーズ／インフィニティ・ウォー" },
+  { id: 2, title: "スパイダーマン：ブランド・ニュー・デイ", year: 2026, genre: "アクション・アドベンチャー", cast: "トム・ホランド、ゼンデイヤ、ジェイコブ・バタロン、ジョン・バーンサル、マーク・ラファロ", story: "人々の記憶から自分の存在が消えたピーター・パーカーが、スパイダーマンとして街を守る中で、新たな脅威に立ち向かう。", similar: "スパイダーマン：ノー・ウェイ・ホーム" },
+  { id: 3, title: "最強のふたり", year: 2011, genre: "ヒューマン・コメディ・ドラマ", cast: "フランソワ・クリュゼ、オマール・シー、アンヌ・ル・ニ", story: "事故で首から下が麻痺した大富豪フィリップと、介護人として雇われた青年ドリスが、生活や価値観の違いを乗り越えて友情を深めていく。", similar: "グリーンブック" },
+  { id: 4, title: "余命10年", year: 2022, genre: "恋愛・ドラマ", cast: "小松菜奈、坂口健太郎、山田裕貴、奈緒、井口理", story: "余命10年と宣告された茉莉が、同窓会で再会した和人と恋に落ちる。限られた時間の中で、人生や愛することの意味を見つめていく。", similar: "8年越しの花嫁" },
+  { id: 5, title: "余命一年の僕が、余命半年の君と出会った話。", year: 2024, genre: "恋愛・青春・ドラマ", cast: "永瀬廉、出口夏希、横田真悠、木村文乃、大塚寧々", story: "余命1年を宣告された秋人は、病院の屋上で絵を描く春奈と出会う。彼女も余命半年であることを知り、互いに残された時間を大切に過ごしていく。", similar: "君の膵臓をたべたい" },
+  { id: 6, title: "今夜、世界からこの恋が消えても", year: 2022, genre: "恋愛・青春・ドラマ", cast: "道枝駿佑、福本莉子、古川琴音、松本穂香", story: "前向性健忘症によって眠るとその日の記憶を失ってしまう真織と、彼女を支える透。二人は毎日新しい恋を積み重ねていく。", similar: "君の膵臓をたべたい" },
+  { id: 7, title: "君の膵臓をたべたい", year: 2017, genre: "青春・恋愛・ドラマ", cast: "浜辺美波、北村匠海、北川景子、小栗旬", story: "膵臓の病気を患うクラスメイトの桜良が書いた闘病日記を偶然見つけた僕は、彼女と一緒に過ごすようになる。二人の交流を通して、生きることの意味を描く。", similar: "余命10年" },
+  { id: 8, title: "クレヨンしんちゃん 嵐を呼ぶ アッパレ！戦国大合戦", year: 2002, genre: "アニメ・コメディ・時代劇", cast: "矢島晶子、屋良有作、小林愛、ならはしみき、藤原啓治", story: "突然戦国時代にタイムスリップしたしんのすけは、侍の井尻又兵衛を助ける。春日城を舞台に、しんのすけたちの活躍と戦国時代の人々との交流を描く。", similar: "クレヨンしんちゃん 嵐を呼ぶ モーレツ！オトナ帝国の逆襲" }
+];
+
+app.get("/movies", (req, res) => {
+  res.render('db5', { data: movies });
+});
+
+app.get("/movies/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = movies[number - 1];
+  res.render('db5_detail', { data: detail });
 });
 
 app.get("/hello1", (req, res) => {
